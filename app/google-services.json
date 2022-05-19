@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "156953862430",
+    "project_id": "email-m09",
+    "storage_bucket": "email-m09.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156953862430:android:c4e89b0209b1ac0d1ca90f",
+        "android_client_info": {
+          "package_name": "es.lumsoft.email"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "156953862430-ffsp3ufolu5utdtnlbneecqe9pqs3ocr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9Cp0mRJgUObP2IkHUyBCT5vZbURksf_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "156953862430-ffsp3ufolu5utdtnlbneecqe9pqs3ocr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
