@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="es.lumsoft.email">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Email">
         <activity
-            android:name=".enviarCorreu"
+            android:name=".LecturaCorreu"
+            android:exported="false" />
+        <activity
+            android:name=".EnviarCorreu"
             android:exported="true" />
         <activity
             android:name=".PaginaPrincipal"

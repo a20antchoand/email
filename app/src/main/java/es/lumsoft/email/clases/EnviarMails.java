@@ -1,40 +1,48 @@
+
+
 package es.lumsoft.email.clases;
+import android.content.Context;
+import android.os.StrictMode;
+import android.widget.Toast;
 
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.activation.*;
 
 public class EnviarMails {
 
-    final static String username = "grup01@m09.alumnes.inspedralbes.cat";
-    final static String to = "grup01@m09.alumnes.inspedralbes.cat";
-    final static String password = "grup01_M09";
+    public EnviarMails (Context context, String to, String titol, String missatge) {
+        // Canviar els paràmetres
+        final String from = "grup01@m09.alumnes.inspedralbes.cat";
+        final String password = "grup01_M09";
+        final String host = "mail.m09.alumnes.inspedralbes.cat";
+        final String port = "587";
+        final String username = from; // correct password for gmail id
 
+        System.out.println("Comencem!!!");
 
-    public static void enviarCorreu (String titol, String missatge) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
 
         // Get system properties
         Properties properties = System.getProperties();
-        final String host = "mail.m09.alumnes.inspedralbes.cat";
-        final String port = "587";
         // Setup mail server
         properties.setProperty("mail.smtp.host", host);
-
         // SSL Port
         properties.put("mail.smtp.port", port);
-
         // enable authentication
         properties.put("mail.smtp.auth", "true");
-
+        properties.put("mail.smtp.starttls.enable", "true");
         // SSL Factory
-        properties.put("mail.smtp.socketFactory.class",
-                "javax.net.ssl.SSLSocketFactory");
-
+        //properties.put("mail.smtp.socketFactory.class",
+        //        "javax.net.ssl.SSLSocketFactory");
         // creating Session instance referenced to
         // Authenticator object to pass in
         // Session.getInstance argument
         Session session = Session.getDefaultInstance(properties,
-                new Authenticator() {
+                new javax.mail.Authenticator() {
 
                     // override the getPasswordAuthentication
                     // method
@@ -44,14 +52,14 @@ public class EnviarMails {
                     }
                 });
 
-        //compose the message
+//compose the message
         try {
             // javax.mail.internet.MimeMessage class is mostly
             // used for abstraction.
             MimeMessage message = new MimeMessage(session);
 
             // header field of the header.
-            message.setFrom(new InternetAddress(username));
+            message.setFrom(new InternetAddress(from));
 
             message.addRecipient(Message.RecipientType.TO,
                     new InternetAddress(to));
@@ -59,11 +67,14 @@ public class EnviarMails {
             message.setText(missatge);
 
             // Send message
+            System.out.println("Inici de l'enviament... (paciència que pot trigar uns 10 segons.... )");
             Transport.send(message);
+            System.out.println("Enviat!!!");
+            Toast.makeText(context, "S'ha enviat el correu correctament!", Toast.LENGTH_SHORT).show();
         } catch (MessagingException mex) {
             mex.printStackTrace();
+            Toast.makeText(context, "Error al enviar el correu!", Toast.LENGTH_SHORT).show();
+
         }
-
     }
-
 }
