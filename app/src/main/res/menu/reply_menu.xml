@@ -3,5 +3,5 @@
 
     <item
         android:id="@+id/reply"
-        android:title="Tancar sessió" />
+        android:title="Responder" />
 </menu>

@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import es.lumsoft.email.clases.Email;
 import es.lumsoft.email.clases.RebreMails;
@@ -64,7 +63,7 @@ public class PaginaPrincipal extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.logout:
+            case R.id.reply:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(PaginaPrincipal.this, LoginActivity.class));
                 return true;

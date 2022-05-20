@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -16,6 +18,7 @@ import es.lumsoft.email.databinding.ActivityPaginaPrincipalBinding;
 public class LecturaCorreu extends AppCompatActivity {
 
     ActivityLecturaCorreuBinding binding;
+    Bundle info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,18 +35,25 @@ public class LecturaCorreu extends AppCompatActivity {
 
     private void setup() {
 
-        Bundle info = getIntent().getExtras();
+        info = getIntent().getExtras();
 
 
         binding.txtTtitolEmail.setText(info.getString("titol"));
-        binding.txtFromEmail.setText(info.getString("from"));
+        binding.txtFromEmail.setText("De: " + info.getString("from"));
         binding.txtTimeEmail.setText(info.getString("time"));
-        binding.txtToEmail.setText(info.getString("to"));
+        binding.txtToEmail.setText("Para: " + info.getString("to"));
         binding.txtContentEmail.setText(info.getString("content"));
 
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.reply_menu, menu);
+        return true;
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -51,6 +61,14 @@ public class LecturaCorreu extends AppCompatActivity {
             case android.R.id.home:
                 startActivity(new Intent(LecturaCorreu.this, PaginaPrincipal.class));
                 return true;
+            case  R.id.reply:
+                Intent intent = new Intent(LecturaCorreu.this, EnviarCorreu.class);
+                intent.putExtra("titol", info.getString("titol"));
+                intent.putExtra("from", info.getString("from"));
+                intent.putExtra("content", info.getString("content"));
+
+                startActivity(intent);
+
         }
         return super.onOptionsItemSelected(item);
     }

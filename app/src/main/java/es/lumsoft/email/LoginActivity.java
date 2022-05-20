@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
 
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
-        setContentView(view);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -36,7 +35,10 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(new Intent(LoginActivity.this, PaginaPrincipal.class));
         } else {
             setup();
+            setContentView(view);
         }
+
+
     }
 
     private void setup() {

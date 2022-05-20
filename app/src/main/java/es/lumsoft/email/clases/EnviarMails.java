@@ -12,10 +12,11 @@ import javax.activation.*;
 
 public class EnviarMails {
 
-    public EnviarMails (Context context, String to, String titol, String missatge) {
+    public EnviarMails (Context context, String from, String to, String titol, String missatge) {
         // Canviar els paràmetres
-        final String from = "grup01@m09.alumnes.inspedralbes.cat";
-        final String password = "grup01_M09";
+        String[] textDividit = from.split("@");
+
+        final String password = textDividit[0] + "_M09";
         final String host = "mail.m09.alumnes.inspedralbes.cat";
         final String port = "587";
         final String username = from; // correct password for gmail id

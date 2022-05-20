@@ -31,6 +31,17 @@ public class EnviarCorreu extends AppCompatActivity {
         user = mAuth.getCurrentUser();
         setContentView(view);
 
+        if (getIntent().getExtras() != null) {
+
+            Bundle reply = getIntent().getExtras();
+
+            binding.editTextTo.setText(reply.getString("from"));
+            binding.editTextTitol.setText("Re: " + reply.getString("titol"));
+
+            binding.editTextMissatge.setText("\n\n\n\n\n\n\n-----------------------------------------------\n\n" + reply.getString("content"));
+
+        }
+
         setup();
 
     }
@@ -43,13 +54,20 @@ public class EnviarCorreu extends AppCompatActivity {
 
         binding.imageView3.setOnClickListener(l -> {
             if (!binding.editTextTo.getText().toString().equals("")) {
-                new EnviarMails(this, binding.editTextTo.getText().toString(), binding.editTextTitol.getText().toString(), binding.editTextMissatge.getText().toString());
-                new SweetAlertDialog(EnviarCorreu.this, SweetAlertDialog.SUCCESS_TYPE)
-                        .setTitleText("Correu enviat")
-                        .setContentText("S'ha enviat correctament!")
-                        .show();
-                startActivity(new Intent(EnviarCorreu.this, PaginaPrincipal.class));
+                new EnviarMails(this, binding.txtViewFrom.getText().toString(), binding.editTextTo.getText().toString(), binding.editTextTitol.getText().toString(), binding.editTextMissatge.getText().toString());
 
+
+                SweetAlertDialog sDialog = new SweetAlertDialog(EnviarCorreu.this, SweetAlertDialog.SUCCESS_TYPE)
+                        .setTitleText("Correu enviat")
+                        .setContentText("S'ha enviat correctament!");
+
+                sDialog.setOnDismissListener(sweetAlertDialog -> {
+
+                            startActivity(new Intent(EnviarCorreu.this, PaginaPrincipal.class));
+
+                        });
+
+                sDialog.show();
             }else {
                 new SweetAlertDialog(EnviarCorreu.this, SweetAlertDialog.ERROR_TYPE)
                         .setTitleText("Oops...")
